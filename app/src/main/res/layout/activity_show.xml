@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ShowActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:layout_width="match_parent"
         android:layout_centerInParent="true"
         android:id="@+id/imgView"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

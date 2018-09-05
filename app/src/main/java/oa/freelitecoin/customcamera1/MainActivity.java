@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
@@ -189,7 +190,24 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         }
 
-        params.setRotation(rotation);
+//        params.setRotation(rotation);
+
+        params.setSceneMode(Camera.Parameters.SCENE_MODE_AUTO);
+        params.setWhiteBalance(Camera.Parameters.WHITE_BALANCE_AUTO);
+        params.setExposureCompensation(0);
+        params.setPictureFormat(ImageFormat.JPEG);
+        params.setJpegQuality(100);
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+
+        List<Camera.Size> sizes = params.getSupportedPictureSizes();
+        Camera.Size size = sizes.get(0);
+        for(int i=0;i<sizes.size();i++)
+        {
+            if(sizes.get(i).width > size.width)
+                size = sizes.get(i);
+        }
+        params.setPictureSize(size.width, size.height);
+        c.setParameters(params);
     }
 
     private void showFlashButton(Camera.Parameters params) {
